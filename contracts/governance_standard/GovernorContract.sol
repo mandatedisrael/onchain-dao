@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: MIT
+
+//Contract that has all the voting logics
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/governance/Governor.sol";
