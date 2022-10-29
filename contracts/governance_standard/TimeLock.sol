@@ -6,7 +6,7 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/governance/TimelockController.sol";
 
-contract Timelock is TimelockController{
+contract TimeLock is TimelockController{
     //minDelay: How long to wait before executing
     //proposers: list of addreses that can propose
     //executors: who can execute when a proposal passes

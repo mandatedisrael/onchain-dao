@@ -1,11 +1,13 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types"
 import { DeployFunction } from "hardhat-deploy/types"
+// @ts-ignore // this is a workaround for a bug in the typescript compiler
 import { ethers } from "hardhat";
 
 const deployGovernanceToken: DeployFunction = async function (
     hre: HardhatRuntimeEnvironment
     ) {
-        const {getNamedAccounts, deployments, network} = hre;
+        //@ts-ignore
+        const {getNamedAccounts, deployments} = hre;
         const { deploy, log } = deployments;
         const { deployer } = await getNamedAccounts();
         log("Deploying Governance Token...");
@@ -26,7 +28,7 @@ const deployGovernanceToken: DeployFunction = async function (
         const governanceToken = await ethers.getContractAt("GovernanceToken", governanceTokenAddress); 
         const tx = await governanceToken.delegate(delegatedAccount);
         await tx.wait(1); //wait for transaction to be mined by 1 block
-        console.log(`Checkpoints ${await governanceToken.numCheckpoints(delegatedAccount)}`);
+        console.log(`Checkpoints ${await governanceToken.numCheckpoints(delegatedAccount)}`); // if this returns 0, that means the delegate function did not work and you havent delegated your vote
     }
     
 
