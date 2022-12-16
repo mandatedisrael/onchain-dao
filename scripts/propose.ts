@@ -3,11 +3,13 @@ import {
     FUNC, 
     PROPOSAL_DESCRIPTION, 
     developmentChains, 
-    VOTING_DELAY 
+    VOTING_DELAY ,
+    proposalFile
 } from "../helper-hardhat-config";
 // @ts-ignore
 import { ethers, network } from "hardhat";
 import { moveBlocks } from "../Utils/move-blocks";
+import * as fs from "fs";
 
 
 export async function propose(args: any[], functionTocall: string, proposalDescription: string) {
@@ -30,12 +32,16 @@ export async function propose(args: any[], functionTocall: string, proposalDescr
         [encodedFunctionCall], //calldatas
         proposalDescription
     );
-    proposeTx.wait(1);
+    const proposeReceipt = await proposeTx.wait(1);
 
     //move blocks forward to trigger the voting period if in local network
     if (developmentChains.includes(network.name)) {
         await moveBlocks(VOTING_DELAY + 1);
     }
+    const proposalId = proposeReceipt.events[0].args.proposalId;
+    let proposals = JSON.parse(fs.readFileSync(proposalFile, "utf8"));
+    proposals[network.config.chainId!.toString()].push(proposalId.toString());
+    fs.writeFileSync(proposalFile, JSON.stringify(proposals));
 }
 
 propose([NEW_STORE_VALUE], FUNC, PROPOSAL_DESCRIPTION)
