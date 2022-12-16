@@ -23,6 +23,7 @@ async function main (proposalIndex:number) {
         if (developmentChains.includes(network.name)) {
             await moveBlocks(VOTING_PERIOD +1);
         }
+        console.log("Congratulations! You have successfully voted for the proposal")
 }
 
 main(index)
