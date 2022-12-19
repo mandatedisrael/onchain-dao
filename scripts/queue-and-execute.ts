@@ -15,7 +15,7 @@ export async function queueAndExecute(){
         ethers.utils.toUtf8Bytes(PROPOSAL_DESCRIPTION
         ));
     const governor = await ethers.getContract("GovernorContract");
-    console.log("Queueing.............");
+    console.log("Proposal voted successfully! Queueing.............");
     const queueTx = await governor.queue(
         [box.address], 
         [0], 
@@ -38,7 +38,7 @@ export async function queueAndExecute(){
     await executeTx.wait(1);
 
     const boxNewValue = await box.retrieve();
-    console.log("New Box Value: ", boxNewValue.toString());
+    console.log("New edit function added successfully!");
 } 
 
 queueAndExecute()

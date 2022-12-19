@@ -5,6 +5,6 @@ export const QUORUM_PERCENTAGE = 4; // 4% PERCENTAGE OF VOTERS atleast for a vot
 export const ADDRESS_ZERO = "0x0000000000000000000000000000000000000000";
 export const NEW_STORE_VALUE = 77;
 export const FUNC = "store";
-export const PROPOSAL_DESCRIPTION = "Proposal #1: Kindly Store 77 in the Box!";
+export const PROPOSAL_DESCRIPTION = "Proposal #1: It's high time we add an edit button on twitter!";
 export const developmentChains = ["hardhat", "localhost"];
 export const proposalFile = "proposal.json";

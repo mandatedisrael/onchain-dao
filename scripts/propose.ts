@@ -15,7 +15,7 @@ import * as fs from "fs";
 export async function propose(args: any[], functionTocall: string, proposalDescription: string) {
     const governor = await ethers.getContract("GovernorContract");
     const box = await ethers.getContract("Box");
-    //encode the function call and the arguments
+    //encode the function call and the arg uments
     const encodedFunctionCall = box.interface.encodeFunctionData(
         functionTocall,
         args
@@ -24,7 +24,7 @@ export async function propose(args: any[], functionTocall: string, proposalDescr
     //console.log("encodedFunctionCall: ", encodedFunctionCall);
 
     //propose the transaction (same as create function in COMPOUND governance)
-    console.log(`Proposing ${functionTocall} on ${box.address} with ${args}`);
+    console.log(`Proposing ${functionTocall} on ${box.address} with ${args}, a new feature`);
     console.log(`Proposal Description: \n ${proposalDescription}`);
     const proposeTx = await governor.propose(
         [box.address], //targets
